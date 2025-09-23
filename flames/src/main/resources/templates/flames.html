@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http:\\www.thymeleaf.com">
+    <head>
+        <title>Flames Checker</title>
+        <style>
+            div{
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body >
+        <div>
+        <h2 id="main">Flames Checker</h2>
+        <form action="/flames" method="post" autocomplete="off">
+            <label for="name1">Your Name:</label>
+            <input type="text" id="name1" name="name1" required><br><br>
+
+            <label for="name2">Partner's Name:</label>
+            <input type="text" id="name2" name="name2" required><br><br>
+
+            <button type="submit">Check Result</button>
+        </form>
+        
+        <h2>Flames Result: <span th:text="${flamesResult}"></span></h2>
+        </div>
+    </body>
+</html>
