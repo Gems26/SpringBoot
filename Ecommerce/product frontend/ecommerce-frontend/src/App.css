@@ -1,0 +1,120 @@
+/* Body */
+body {
+    background-color: #f0f4f8; /* soft light gray-blue */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    padding: 30px 20px;
+    background: linear-gradient(135deg, #007bff, #00c6ff);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.header .tagline {
+    font-size: 16px;
+    margin-top: 8px;
+    color: #f0f8ff;
+    font-weight: 400;
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 15px;
+    padding: 20px;
+}
+
+/* Card */
+.card {
+    background-color: #ffffff; /* pure white for cards */
+    width: 220px;
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+}
+
+/* Card Hover */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    background-color: #e6f0fa; /* subtle light blue on hover */
+}
+
+/* Product Image */
+.card img.prodimg {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* Product Name & Description */
+.card h3.prodname {
+    font-size: 16px;
+    margin: 4px 0;
+    color: #222;
+}
+
+.card p.desc {
+    font-size: 13px;
+    margin: 2px 0;
+    color: #555;
+}
+
+/* Price & Stock */
+.card .price p,
+.card .stock p {
+    font-weight: bold;
+    font-size: 13px;
+    margin: 2px 0;
+}
+
+/* Rating Stars */
+.card .rating span {
+    color: #f39c12;
+    margin-right: 2px;
+}
+
+/* Button */
+.card button.addcart {
+    margin-top: 6px;
+    padding: 7px 12px;
+    font-size: 12px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.card button.addcart:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+}
