@@ -33,9 +33,12 @@ public class CartController {
     }
 
     @GetMapping
-    public List<Cart> getAllCarts(){
-        return cartService.getAllCarts();
+    public ResponseEntity<List<Cart>> getAllCarts(){
+        
+        return new ResponseEntity<>(cartService.getAllCarts(),HttpStatus.CREATED);
     }
+
+   
 
 
 }

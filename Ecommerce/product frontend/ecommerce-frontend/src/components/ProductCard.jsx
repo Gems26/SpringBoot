@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ProductCard({ product }) {
+function ProductCard({ product ,addToCart }) {
     return (
         
         <div>
@@ -25,7 +25,7 @@ function ProductCard({ product }) {
                     <div className='stock'>
                         <p>Available stock:{product.stock}</p>
                     </div>
-                    <button className='addcart'>Add to Cart</button>
+                    <button className='addcart' onClick={()=>addToCart(product)}>Add to Cart</button>
                 </div>
 
 

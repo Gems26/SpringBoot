@@ -39,6 +39,7 @@ body {
     padding: 20px;
 }
 
+
 /* Card */
 .card {
     background-color: #ffffff; /* pure white for cards */
@@ -117,4 +118,76 @@ body {
 .container{
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+    gap: 40px;
 }
+
+/* Content Layout (Grid) */
+.content {
+    display: grid;
+    grid-template-columns: 3fr 1fr; /* Adjusting the proportion of columns */
+    gap: 20px; /* Adding space between the two columns */
+}
+
+/* Right Cart */
+.right-cart {
+    background-color: #fff;
+    text-align: center;
+    margin: 15px auto; /* Auto margin for centering the cart */
+    width: 100%; /* Ensure cart takes full width within its grid column */
+    max-width: 220px; /* Ensure the cart doesn't get too wide */
+    height: 95vh;
+    overflow-y: auto;
+    scrollbar-width: none;
+    display: flex; /* Flexbox for centering items inside */
+    flex-direction: column;
+    align-items: center; /* Align items horizontally to the center */
+    justify-content: flex-start; /* Align items vertically to the top */
+}
+
+.right-cart h1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Same font family */
+    font-size: 20px; /* Adjust the size as needed */
+    color: #222; /* Same color as the product name */
+    font-weight: 600; /* Slightly bolder for prominence */
+    margin-bottom: 15px; /* Space below the title */
+    text-align: center; /* Center the title */
+}
+
+/* Cart List */
+.right-cart ul {
+    list-style-type: none;
+    padding: 0; /* Remove default padding from ul */
+    margin: 0; /* Remove default margin from ul */
+    width: 100%; /* Ensure the ul takes full width of the container */
+}
+
+/* Cart Item */
+.right-cart ul li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 5px;
+    transition: transform 0.3s ease; /* Smooth transition for zoom effect */
+}
+
+/* Cart Item Hover (Zoom In Effect) */
+.right-cart ul li:hover {
+    transform: scale(1.1); /* Enlarges the cart item to 110% of its size */
+}
+
+/* Cart Item Image */
+.right-cart ul li img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    transition: transform 0.3s ease; /* Optional smooth transition for image */
+}
+
+/* Optional: Zoom in effect on image as well */
+.right-cart ul li:hover img {
+    transform: scale(1.1); /* Enlarges the image to 110% of its size */
+}
+
