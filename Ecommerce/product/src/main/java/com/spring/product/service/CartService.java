@@ -1,5 +1,7 @@
 package com.spring.product.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.spring.product.entity.Cart;
@@ -20,7 +22,13 @@ public class CartService {
     }
 
     public Cart addToCart(Long productId,int quantity){
-        Cart cart=new Cart(productId,quantity);
+        Product product =  productRepository.findById(productId)
+        .orElseThrow(()-> new RuntimeException("Product not found"));
+        Cart cart=new Cart(product,quantity);
         return cartRepository.save(cart);
+    }
+
+    public List<Cart> getAllCarts(){
+        return cartRepository.findAll();
     }
 }

@@ -3,12 +3,14 @@ package com.spring.product.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Cart {
     
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
@@ -16,16 +18,23 @@ public class Cart {
     @JoinColumn(name = "product_id",nullable = false)
     private Product product;
 
+    private int quantity;
+
+    public Cart(long id, int quantity) {
+        this.id = id;
+        this.quantity = quantity;
+    }
+
+
     public Cart(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
     }
+    
 
-    public Cart(Long productId, int quantity2) {
-        //TODO Auto-generated constructor stub
+    public Cart() {
     }
 
-    private int quantity;
 
     public long getId() {
         return id;
