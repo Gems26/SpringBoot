@@ -1,0 +1,190 @@
+# Detailed Explanation of Annotations
+
+## 🔹 Spring Boot Core Annotations
+
+### 1. `@SpringBootApplication`
+- **Where used:** `ProductApplication.java`  
+- **What it does:**  
+  - Entry point of the Spring Boot app.  
+  - Combines three annotations:  
+    - `@Configuration` → Marks class as source of Spring beans.  
+    - `@EnableAutoConfiguration` → Automatically configures Spring Boot based on dependencies (e.g., JPA, Web, Security).  
+    - `@ComponentScan` → Automatically scans for components (`@Service`, `@Repository`, `@Controller`, etc.) in the package.  
+- **Why needed:** Without this, you’d have to manually configure beans and enable components.  
+
+---
+
+### 2. `@Configuration`
+- **Where used:** `CorsConfig.java`  
+- **What it does:**  
+  - Marks the class as a source of bean definitions.  
+  - Equivalent to writing an XML config in old Spring.  
+- **Why needed:** Used when you want to define beans programmatically, like CORS settings.  
+
+---
+
+### 3. `@Bean`
+- **Where used:** `CorsConfig.java`  
+- **What it does:**  
+  - Declares a method that returns a bean object managed by Spring’s IoC container.  
+- **Example:**  
+  ```java
+  @Bean
+  public CorsFilter corsFilter() {
+      return new CorsFilter();
+  }
+  ```
+- **Why needed:** Lets you inject reusable components into the application.  
+
+---
+
+### 4. `@Service`
+- **Where used:** `CartService.java`, `ProductService.java`  
+- **What it does:**  
+  - Marks the class as part of the **Service layer**.  
+  - Helps Spring identify business logic classes.  
+- **Why needed:** Service classes act as a bridge between Controller and Repository.  
+
+---
+
+### 5. `@Repository`
+- **Where used:** `CartRepository.java`, `ProductRepository.java`  
+- **What it does:**  
+  - Marks the class as part of the **Repository layer**.  
+  - Provides **exception translation** → converts database exceptions into Spring’s `DataAccessException`.  
+- **Why needed:** Used for data access operations (DAO).  
+
+---
+
+## 🔹 Spring Web Annotations
+
+### 6. `@RestController`
+- **Where used:** `CartController.java`, `ProductController.java`  
+- **What it does:**  
+  - Combines `@Controller` + `@ResponseBody`.  
+  - Tells Spring this class will handle REST API requests and responses (JSON/XML).  
+- **Why needed:** Eliminates boilerplate of writing `@ResponseBody` on every method.  
+
+---
+
+### 7. `@RequestMapping`
+- **Where used:** Controller classes  
+- **What it does:**  
+  - Maps a URL path to a class or method.  
+- **Example:**  
+  ```java
+  @RequestMapping("/cart")
+  public class CartController { ... }
+  ```
+- **Why needed:** Sets base URL for all methods in that controller.  
+
+---
+
+### 8. `@GetMapping`
+- **Where used:** Controller methods  
+- **What it does:**  
+  - Shortcut for `@RequestMapping(method = RequestMethod.GET)`.  
+  - Handles HTTP GET requests.  
+- **Example:**  
+  ```java
+  @GetMapping("/products")
+  public List<Product> getProducts() { ... }
+  ```  
+
+---
+
+### 9. `@PostMapping`
+- **Where used:** Controller methods  
+- **What it does:**  
+  - Shortcut for `@RequestMapping(method = RequestMethod.POST)`.  
+  - Handles HTTP POST requests.  
+- **Example:**  
+  ```java
+  @PostMapping("/cart")
+  public Cart addToCart(@RequestBody CartItemRequest item) { ... }
+  ```  
+
+---
+
+### 10. `@CrossOrigin`
+- **Where used:** `CartController.java`  
+- **What it does:**  
+  - Allows cross-origin requests (CORS).  
+  - Example: If frontend runs on `http://localhost:3000` and backend on `http://localhost:8080`, this annotation lets them communicate.  
+- **Why needed:** Without it, browser blocks requests (CORS error).  
+
+---
+
+## 🔹 JPA (Hibernate) Annotations
+
+### 11. `@Entity`
+- **Where used:** `Cart.java`, `Product.java`  
+- **What it does:**  
+  - Marks a class as a JPA entity → mapped to a database table.  
+- **Why needed:** Without it, JPA won’t recognize the class as persistable.  
+
+---
+
+### 12. `@Id`
+- **Where used:** Inside `Cart.java`, `Product.java`  
+- **What it does:**  
+  - Declares the primary key field.  
+- **Why needed:** JPA requires every entity to have a primary key.  
+
+---
+
+### 13. `@GeneratedValue`
+- **Where used:** With `@Id` fields  
+- **What it does:**  
+  - Auto-generates values for the primary key.  
+  - Strategies: `AUTO`, `IDENTITY`, `SEQUENCE`, `TABLE`.  
+- **Example:**  
+  ```java
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+  ```  
+
+---
+
+### 14. `@ManyToOne`
+- **Where used:** `Cart.java`  
+- **What it does:**  
+  - Defines a many-to-one relationship between two entities.  
+  - Example: Many `Cart` items can belong to **one Product**.  
+
+---
+
+### 15. `@JoinColumn`
+- **Where used:** `Cart.java`  
+- **What it does:**  
+  - Defines the foreign key column in the database for the relationship.  
+- **Example:**  
+  ```java
+  @ManyToOne
+  @JoinColumn(name="product_id")
+  private Product product;
+  ```  
+
+---
+
+## 🔹 Java Standard Annotation
+
+### 16. `@Override`
+- **Where used:** `CorsConfig.java`  
+- **What it does:**  
+  - Ensures the method **overrides** a superclass/interface method.  
+  - If the parent signature changes, compiler gives an error.  
+
+---
+
+## ✅ Summary
+Your project uses a **standard Spring Boot layered architecture** with annotations mapping responsibilities across:  
+- **Configuration** (startup, beans)  
+- **Controller** (REST APIs)  
+- **Service** (business logic)  
+- **Repository** (database queries)  
+- **Entity** (DB mapping)  
+
+In short, annotations drive the data lifecycle end-to-end:  
+**Client request → Controller → Service → Repository → Entity**
