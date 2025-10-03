@@ -132,11 +132,12 @@ body {
 .right-cart {
     background-color: #fff;
     text-align: center;
-    margin: 15px auto; /* Auto margin for centering the cart */
+    margin: 4px auto; /* Auto margin for centering the cart */
     width: 100%; /* Ensure cart takes full width within its grid column */
     max-width: 220px; /* Ensure the cart doesn't get too wide */
     height: 95vh;
     overflow-y: auto;
+    border-radius: 10px;
     scrollbar-width: none;
     display: flex; /* Flexbox for centering items inside */
     flex-direction: column;
@@ -167,7 +168,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     gap: 5px;
     transition: transform 0.3s ease; /* Smooth transition for zoom effect */
 }
@@ -179,8 +180,8 @@ body {
 
 /* Cart Item Image */
 .right-cart ul li img {
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     object-fit: cover;
     border-radius: 6px;
     transition: transform 0.3s ease; /* Optional smooth transition for image */
@@ -189,5 +190,165 @@ body {
 /* Optional: Zoom in effect on image as well */
 .right-cart ul li:hover img {
     transform: scale(1.1); /* Enlarges the image to 110% of its size */
+}
+
+.right-cart ul li button{
+
+    margin-top: 6px;
+    padding: 7px 12px;
+    font-size: 12px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ff4d4f;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+
+}
+
+/* Proceed to Checkout Button */
+.right-cart .proceed-btn {
+    margin: 10px 0 20px 0; /* spacing above and below */
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 6px;
+    border: none;
+    background-color: #007bff; /* matches addcart buttons */
+    color: #fff;
+    cursor: pointer;
+    width: 90%; /* wider than product buttons */
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+}
+
+.right-cart .proceed-btn:hover {
+    background-color: #0056b3; /* darker blue on hover */
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* subtle hover glow */
+}
+
+/* Cart Page Layout */
+.cart-page {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Cart Page Title */
+.cart-page h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #222;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Cart List */
+.cart-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Cart Item */
+.cart-item {
+    display: grid;
+    grid-template-columns: 80px 1fr 100px;
+    gap: 15px;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    background: #f9fcff;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cart-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+/* Cart Item Image */
+.cart-item img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* Cart Item Info */
+.cart-item-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+
+.cart-item-details h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #222;
+}
+
+.cart-item-details p {
+    margin: 0;
+    font-size: 13px;
+    color: #555;
+}
+
+/* Price */
+.cart-item-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #007bff;
+    text-align: right;
+}
+
+/* Remove Button */
+.cart-item button {
+    margin-top: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.cart-item button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Total Section */
+.cart-total {
+    text-align: right;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #222;
+}
+
+.remove-btn {
+  padding: 6px 12px;
+  font-size: 14px;
+  background-color: #ff4d4f !important; /* force override */
+  color: #fff !important;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 50%;
+  display: inline-block;
+}
+
+.remove-btn:hover {
+  background-color: #d9363e !important;
 }
 

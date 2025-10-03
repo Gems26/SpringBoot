@@ -1,35 +1,16 @@
 import { useEffect, useState } from "react";
 import ProductCard from "./components/ProductCard";
 import "./App.css";
-import {cartProducts, getproducts, sendToCart} from "./api";
+import { getproducts } from "./api";
+import { useCart } from "./components/CartProvider";
+import { useNavigate } from "react-router-dom";
 
 function App() {
   const [products, setProducts] = useState([]);
-  const [cart,setCart]=useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  const addToCart=(product)=>{
-   // setCart((preCart)=>[...preCart,product]);
-    const cartItems={
-      productid:product.id,quantity:1
-    }
-    sendToCart(cartItems).then(()=>{
-      cartProducts().then((response)=>{setCart(mergeProducts(response.data));
-        console.log("got data", response.data);
-        setLoading(false)
-        }).catch((err) => {
-        console.error(err);
-        setError("Error fetching cart data");
-        setLoading(false);
-      });
-      
-    }).catch((err) => {
-        console.error(err);
-        setError("Error fetching cart data");
-        setLoading(false);
-      });
-  };
+  const { cart, addToCart, deleteCartItems } = useCart();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getproducts()
@@ -45,73 +26,50 @@ function App() {
       });
   }, []);
 
-  useEffect(() => {
-    cartProducts()
-      .then((response) => {
-        setCart(mergeProducts(response.data));
-        console.log("got data", response.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setError("Error fetching cart data");
-        setLoading(false);
-      });
-  }, []);
 
-  const mergeProducts = (data)=>{
-      const merged = {};
-      data.forEach((item) => {
-        const productid = item.product.id;
-        if(merged[productid]){
-          merged[productid].quantity+=item.quantity;
-        }
-        else{
-          merged[productid] = {...item}
-        }
-      });
-      return Object.values(merged)
-  }
+
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
   return (
-   <div>
-    <header className="header">
-      <h1>Sky Mart</h1>
-      <p className="tagline">Groceries, Snacks, Essentials – All Under One Sky</p>
-    </header>
+    <div>
+      <header className="header">
+        <h1>Sky Mart</h1>
+        <p className="tagline">Groceries, Snacks, Essentials – All Under One Sky</p>
+      </header>
 
-    <div className="content">
+      <div className="content">
 
-      <div className="container">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} addToCart={addToCart}/>
-        ))}
+        <div className="container">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} addToCart={addToCart} />
+          ))}
+        </div>
+
+        {
+          cart.length > 0 ? (
+            <div className="right-cart">
+              <h1>Cart</h1>
+              <button className="proceed-btn" onClick={()=>navigate("/cart")}>Proceed To CheckOut</button>
+              <ul>
+                {
+                  cart.map((item) => (
+                    <li>
+                      <img src={item.product.img} alt='' className='prodimg' />
+                      {item.product.name} - {item.quantity}
+                      <button onClick={() => deleteCartItems(item.product.id)}>Remove</button>
+                    </li>
+                  ))
+                }
+
+              </ul>
+            </div>) : null
+        }
+
       </div>
 
-      {
-        cart.length>0 ?(
-      <div className="right-cart">
-          <h1>Cart</h1>
-          <ul>
-           {
-            cart.map((item)=>(
-              <li> 
-              <img src={item.product.img} alt='' className='prodimg' />
-              {item.product.name} - {item.quantity}
-            </li>
-            ))
-          }
-            
-          </ul>
-      </div>) : null 
-      }
-
-    </div>  
-
-    </div> 
+    </div>
   );
 }
 

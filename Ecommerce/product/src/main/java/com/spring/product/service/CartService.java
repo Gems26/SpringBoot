@@ -2,6 +2,7 @@ package com.spring.product.service;
 
 import java.util.List;
 
+
 import org.springframework.stereotype.Service;
 
 import com.spring.product.entity.Cart;
@@ -30,5 +31,13 @@ public class CartService {
 
     public List<Cart> getAllCarts(){
         return cartRepository.findAll();
+    }
+
+    public void removeCartByProductId(Long productId){
+        List<Cart> cartItems= cartRepository.findByProductId(productId);
+        if (cartItems.isEmpty()) {
+            throw new RuntimeException("No cart item available for this product");
+        }
+        cartRepository.deleteAll(cartItems);
     }
 }

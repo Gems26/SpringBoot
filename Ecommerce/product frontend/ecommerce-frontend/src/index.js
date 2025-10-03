@@ -3,11 +3,22 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import CartProvider from './components/CartProvider';
+import CartPage from './components/CartPage';
+import {BrowserRouter,Routes,Route} from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <CartProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App></App>}></Route>
+          <Route path="/cart" element={<CartPage></CartPage>}></Route>
+        </Routes>
+      </BrowserRouter>
+    </CartProvider>
+    
   </React.StrictMode>
 );
 
