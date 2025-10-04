@@ -1,0 +1,469 @@
+{
+	"info": {
+		"_postman_id": "31b98c6a-d6a2-4d89-969f-74185302b1f6",
+		"name": "Ecommerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37252170"
+	},
+	"item": [
+		{
+			"name": "add products",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const products = [\r",
+							"    {\r",
+							"        \"name\": \"Pepsi\",\r",
+							"        \"description\": \"Tin of 500 ml\",\r",
+							"        \"img\": \"https://images.unsplash.com/photo-1629203851122-3726ecdf080e?q=80&w=1229&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\",\r",
+							"        \"price\": 150,\r",
+							"        \"rating\": 3.4,\r",
+							"        \"stock\": 200\r",
+							"    },\r",
+							"    {\r",
+							"        \"name\": \"Coca-Cola\",\r",
+							"        \"description\": \"Bottle of 500 ml\",\r",
+							"        \"img\": \"https://images.unsplash.com/photo-1556742045-ea9cf4c5b7d5?crop=entropy&cs=tinysrgb&fit=max&ixid=MXwyMDg5OXwwfDF8c2VhcmNofDE0fHxjb2NhLWNvbGF8ZW58MHx8fHwxNjA3NzMwNTg4&ixlib=rb-1.2.1&q=80&w=400\",\r",
+							"        \"price\": 130,\r",
+							"        \"rating\": 4.2,\r",
+							"        \"stock\": 150\r",
+							"    },\r",
+							"    {\r",
+							"        \"name\": \"Doritos\",\r",
+							"        \"description\": \"Bag of 150g\",\r",
+							"        \"img\": \"https://images.unsplash.com/photo-1622732893327-8e5d9147e24e?crop=entropy&cs=tinysrgb&fit=max&ixid=MXwyMDg5OXwwfDF8c2VhcmNofDh8fGRvYml0b3xlbnwwfHx8fHwxNjA3NzMwNzM2&ixlib=rb-1.2.1&q=80&w=400\",\r",
+							"        \"price\": 250,\r",
+							"        \"rating\": 4.8,\r",
+							"        \"stock\": 80\r",
+							"    },\r",
+							"    {\r",
+							"        \"name\": \"Oreo\",\r",
+							"        \"description\": \"Pack of 2\",\r",
+							"        \"img\": \"https://images.unsplash.com/photo-1598491010155-79f1b9e5b927?crop=entropy&cs=tinysrgb&fit=max&ixid=MXwyMDg5OXwwfDF8c2VhcmNofDJ8fG9yaW8tY2Fza3xlbnwwfHx8fHwxNjA3NzMwNzEy&ixlib=rb-1.2.1&q=80&w=400\",\r",
+							"        \"price\": 300,\r",
+							"        \"rating\": 4.7,\r",
+							"        \"stock\": 250\r",
+							"    },\r",
+							"    {\r",
+							"        \"name\": \"Lays Chips\",\r",
+							"        \"description\": \"Pack of 200g\",\r",
+							"        \"img\": \"https://images.unsplash.com/photo-1583247220804-e8b56f418a44?crop=entropy&cs=tinysrgb&fit=max&ixid=MXwyMDg5OXwwfDF8c2VhcmNofDI1fHxsaXl8ZW58MHx8fHwxNjA3NzMwNzE4&ixlib=rb-1.2.1&q=80&w=400\",\r",
+							"        \"price\": 180,\r",
+							"        \"rating\": 4.3,\r",
+							"        \"stock\": 100\r",
+							"    },\r",
+							"    {\r",
+							"        \"name\": \"Red Bull\",\r",
+							"        \"description\": \"Energy Drink, 250ml\",\r",
+							"        \"img\": \"https://images.unsplash.com/photo-1600792931480-b7c636b1232a?crop=entropy&cs=tinysrgb&fit=max&ixid=MXwyMDg5OXwwfDF8c2VhcmNofDI5fHxjb2ZmZWV8ZW58MHx8fHwxNjA3NzMwNzI1&ixlib=rb-1.2.1&q=80&w=400\",\r",
+							"        \"price\": 220,\r",
+							"        \"rating\": 4.5,\r",
+							"        \"stock\": 180\r",
+							"    },\r",
+							"    {\r",
+							"        \"name\": \"KitKat\",\r",
+							"        \"description\": \"Chocolate Bar, 4 fingers\",\r",
+							"        \"img\": \"https://images.unsplash.com/photo-1573669397070-2ca26e44c1fa?crop=entropy&cs=tinysrgb&fit=max&ixid=MXwyMDg5OXwwfDF8c2VhcmNofDE3fHxraXQtY2hvbGF0ZXR8ZW58MHx8fHwxNjA3NzMwNzM0&ixlib=rb-1.2.1&q=80&w=400\",\r",
+							"        \"price\": 120,\r",
+							"        \"rating\": 4.0,\r",
+							"        \"stock\": 300\r",
+							"    },\r",
+							"    {\r",
+							"        \"name\": \"Nescafe Coffee\",\r",
+							"        \"description\": \"Instant Coffee, 100g\",\r",
+							"        \"img\": \"https://images.unsplash.com/photo-1583345390033-9e207d93d5e6?crop=entropy&cs=tinysrgb&fit=max&ixid=MXwyMDg5OXwwfDF8c2VhcmNofDI3fHxuZXNjYWZlfGVufDB8fHx8fA%3D%3D&ixlib=rb-1.2.1&q=80&w=400\",\r",
+							"        \"price\": 350,\r",
+							"        \"rating\": 4.6,\r",
+							"        \"stock\": 120\r",
+							"    },\r",
+							"    {\r",
+							"        \"name\": \"Toblerone\",\r",
+							"        \"description\": \"Swiss Chocolate, 100g\",\r",
+							"        \"img\": \"https://images.unsplash.com/photo-1603298912619-e3f1b0211fa0?crop=entropy&cs=tinysrgb&fit=max&ixid=MXwyMDg5OXwwfDF8c2VhcmNofDI5fHx0b2JsZXJvbmV8ZW58MHx8fHwxNjA3NzMwNzMy&ixlib=rb-1.2.1&q=80&w=400\",\r",
+							"        \"price\": 500,\r",
+							"        \"rating\": 4.9,\r",
+							"        \"stock\": 50\r",
+							"    },\r",
+							"    {\r",
+							"        \"name\": \"Sprite\",\r",
+							"        \"description\": \"Bottle of 500 ml\",\r",
+							"        \"img\": \"https://images.unsplash.com/photo-1600185027846-70c179d2de3b?crop=entropy&cs=tinysrgb&fit=max&ixid=MXwyMDg5OXwwfDF8c2VhcmNofDIwfHxzcml0ZXxlbnwwfHx8fHwxNjA3NzMwNzM5&ixlib=rb-1.2.1&q=80&w=400\",\r",
+							"        \"price\": 140,\r",
+							"        \"rating\": 3.8,\r",
+							"        \"stock\": 220\r",
+							"    },\r",
+							"    {\r",
+							"        \"name\": \"Nestle Milk\",\r",
+							"        \"description\": \"Pack of 1L\",\r",
+							"        \"img\": \"https://images.unsplash.com/photo-1605596802495-720d0c0efb8c?crop=entropy&cs=tinysrgb&fit=max&ixid=MXwyMDg5OXwwfDF8c2VhcmNofDF8fG1pbGt8ZW58MHx8fHwxNjA3NzMwNzQ0&ixlib=rb-1.2.1&q=80&w=400\",\r",
+							"        \"price\": 100,\r",
+							"        \"rating\": 4.4,\r",
+							"        \"stock\": 180\r",
+							"    },\r",
+							"    {\r",
+							"        \"name\": \"Lay's Stax\",\r",
+							"        \"description\": \"Sour Cream & Onion, 150g\",\r",
+							"        \"img\": \"https://images.unsplash.com/photo-1573669394073-fb104cf3b622?crop=entropy&cs=tinysrgb&fit=max&ixid=MXwyMDg5OXwwfDF8c2VhcmNofDJ8fG9yaW9xX3JpcHxlbnwwfHx8fHwxNjA3NzMwNzUz&ixlib=rb-1.2.1&q=80&w=400\",\r",
+							"        \"price\": 250,\r",
+							"        \"rating\": 4.6,\r",
+							"        \"stock\": 220\r",
+							"    },\r",
+							"    {\r",
+							"        \"name\": \"Monster Energy\",\r",
+							"        \"description\": \"Energy Drink, 500ml\",\r",
+							"        \"img\": \"https://images.unsplash.com/photo-1600792931480-b7c636b1232a?crop=entropy&cs=tinysrgb&fit=max&ixid=MXwyMDg5OXwwfDF8c2VhcmNofDI5fHxjb2ZmZWV8ZW58MHx8fHwxNjA3NzMwNzI1&ixlib=rb-1.2.1&q=80&w=400\",\r",
+							"        \"price\": 180,\r",
+							"        \"rating\": 4.3,\r",
+							"        \"stock\": 220\r",
+							"    },\r",
+							"    {\r",
+							"        \"name\": \"Crunch\",\r",
+							"        \"description\": \"Chocolate Bar, 50g\",\r",
+							"        \"img\": \"https://images.unsplash.com/photo-1573669394073-fb104cf3b622?crop=entropy&cs=tinysrgb&fit=max&ixid=MXwyMDg5OXwwfDF8c2VhcmNofDJ8fG9yaW9xX3JpcHxlbnwwfHx8fHwxNjA3NzMwNzUz&ixlib=rb-1.2.1&q=80&w=400\",\r",
+							"        \"price\": 100,\r",
+							"        \"rating\": 3.9,\r",
+							"        \"stock\": 180\r",
+							"    },\r",
+							"    // Add the rest of the products here...\r",
+							"];\r",
+							"\r",
+							"// Get the current index from environment variables\r",
+							"let index = pm.environment.get(\"index\") || 0;\r",
+							"\r",
+							"if (index < products.length) {\r",
+							"    const product = products[index];\r",
+							"    \r",
+							"    // Convert rating to an integer\r",
+							"    const rating = Math.round(product.rating);\r",
+							"\r",
+							"    pm.environment.set(\"name\", product.name);\r",
+							"    pm.environment.set(\"description\", product.description);\r",
+							"    pm.environment.set(\"img\", product.img);\r",
+							"    pm.environment.set(\"price\", product.price);\r",
+							"    pm.environment.set(\"rating\", rating);\r",
+							"    pm.environment.set(\"stock\", product.stock);\r",
+							"\r",
+							"    // Increase the index for the next request\r",
+							"    pm.environment.set(\"index\", index + 1);\r",
+							"} else {\r",
+							"    // Reset the index once all requests have been sent\r",
+							"    pm.environment.set(\"index\", 0);\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{name}}\",\r\n    \"description\": \"{{description}}\",\r\n    \"img\": \"{{img}}\",\r\n    \"price\": \"{{price}}\",\r\n    \"rating\": \"{{rating}}\",\r\n    \"stock\": \"{{stock}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add cart item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productid\":1,\r\n    \"quantity\":4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/cart/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cart",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete cart item",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/cart/product/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cart",
+						"product",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list cart items",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/cart",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cart"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					"const products = [\r",
+					"    {\r",
+					"        \"name\": \"Pepsi\",\r",
+					"        \"description\": \"Tin of 500 ml\",\r",
+					"        \"img\": \"https://images.pexels.com/photos/5965900/pexels-photo-5965900.jpeg\",\r",
+					"        \"price\": 150,\r",
+					"        \"rating\": 3.4,\r",
+					"        \"stock\": 200\r",
+					"    },\r",
+					"    {\r",
+					"        \"name\": \"Coca-Cola\",\r",
+					"        \"description\": \"Bottle of 500 ml\",\r",
+					"        \"img\": \"https://images.pexels.com/photos/1381707/pexels-photo-1381707.jpeg\",\r",
+					"        \"price\": 130,\r",
+					"        \"rating\": 4.2,\r",
+					"        \"stock\": 150\r",
+					"    },\r",
+					"    {\r",
+					"        \"name\": \"Doritos\",\r",
+					"        \"description\": \"Bag of 150g\",\r",
+					"        \"img\": \"https://images.pexels.com/photos/2467169/pexels-photo-2467169.jpeg\",\r",
+					"        \"price\": 250,\r",
+					"        \"rating\": 4.8,\r",
+					"        \"stock\": 80\r",
+					"    },\r",
+					"    {\r",
+					"        \"name\": \"Oreo\",\r",
+					"        \"description\": \"Pack of 10 biscuits\",\r",
+					"        \"img\": \"https://images.pexels.com/photos/1287675/pexels-photo-1287675.jpeg\",\r",
+					"        \"price\": 180,\r",
+					"        \"rating\": 4.5,\r",
+					"        \"stock\": 100\r",
+					"    },\r",
+					"    {\r",
+					"        \"name\": \"Lays Chips\",\r",
+					"        \"description\": \"Bag of 200g\",\r",
+					"        \"img\": \"https://images.pexels.com/photos/3131964/pexels-photo-3131964.jpeg\",\r",
+					"        \"price\": 220,\r",
+					"        \"rating\": 4.1,\r",
+					"        \"stock\": 120\r",
+					"    },\r",
+					"    {\r",
+					"        \"name\": \"Red Bull\",\r",
+					"        \"description\": \"Energy drink 250 ml\",\r",
+					"        \"img\": \"https://images.pexels.com/photos/5327430/pexels-photo-5327430.jpeg\",\r",
+					"        \"price\": 300,\r",
+					"        \"rating\": 4.6,\r",
+					"        \"stock\": 50\r",
+					"    },\r",
+					"    {\r",
+					"        \"name\": \"KitKat\",\r",
+					"        \"description\": \"Chocolate bar 40g\",\r",
+					"        \"img\": \"https://images.pexels.com/photos/5631297/pexels-photo-5631297.jpeg\",\r",
+					"        \"price\": 150,\r",
+					"        \"rating\": 4.3,\r",
+					"        \"stock\": 200\r",
+					"    },\r",
+					"    {\r",
+					"        \"name\": \"Nescafe Coffee\",\r",
+					"        \"description\": \"Instant coffee 50g\",\r",
+					"        \"img\": \"https://images.pexels.com/photos/1749162/pexels-photo-1749162.jpeg\",\r",
+					"        \"price\": 350,\r",
+					"        \"rating\": 4.7,\r",
+					"        \"stock\": 40\r",
+					"    },\r",
+					"    {\r",
+					"        \"name\": \"Toblerone\",\r",
+					"        \"description\": \"Chocolate 100g\",\r",
+					"        \"img\": \"https://images.pexels.com/photos/1851422/pexels-photo-1851422.jpeg\",\r",
+					"        \"price\": 500,\r",
+					"        \"rating\": 4.9,\r",
+					"        \"stock\": 30\r",
+					"    },\r",
+					"    {\r",
+					"        \"name\": \"Sprite\",\r",
+					"        \"description\": \"Bottle of 500 ml\",\r",
+					"        \"img\": \"https://images.pexels.com/photos/5225544/pexels-photo-5225544.jpeg\",\r",
+					"        \"price\": 120,\r",
+					"        \"rating\": 3.9,\r",
+					"        \"stock\": 180\r",
+					"    },\r",
+					"    {\r",
+					"        \"name\": \"Nestle Milk\",\r",
+					"        \"description\": \"Milk pack 1L\",\r",
+					"        \"img\": \"https://images.pexels.com/photos/1656917/pexels-photo-1656917.jpeg\",\r",
+					"        \"price\": 70,\r",
+					"        \"rating\": 4.2,\r",
+					"        \"stock\": 250\r",
+					"    },\r",
+					"    {\r",
+					"        \"name\": \"Lay's Stax\",\r",
+					"        \"description\": \"Snack chips 165g\",\r",
+					"        \"img\": \"https://images.pexels.com/photos/7560659/pexels-photo-7560659.jpeg\",\r",
+					"        \"price\": 240,\r",
+					"        \"rating\": 4.4,\r",
+					"        \"stock\": 60\r",
+					"    },\r",
+					"    {\r",
+					"        \"name\": \"Monster Energy\",\r",
+					"        \"description\": \"Energy drink 500ml\",\r",
+					"        \"img\": \"https://images.pexels.com/photos/3943788/pexels-photo-3943788.jpeg\",\r",
+					"        \"price\": 200,\r",
+					"        \"rating\": 4.5,\r",
+					"        \"stock\": 90\r",
+					"    },\r",
+					"    {\r",
+					"        \"name\": \"Hershey's\",\r",
+					"        \"description\": \"Chocolate bar 40g\",\r",
+					"        \"img\": \"https://images.pexels.com/photos/3815699/pexels-photo-3815699.jpeg\",\r",
+					"        \"price\": 160,\r",
+					"        \"rating\": 4.6,\r",
+					"        \"stock\": 220\r",
+					"    },\r",
+					"    {\r",
+					"        \"name\": \"Snickers\",\r",
+					"        \"description\": \"Chocolate bar 45g\",\r",
+					"        \"img\": \"https://images.pexels.com/photos/6240155/pexels-photo-6240155.jpeg\",\r",
+					"        \"price\": 180,\r",
+					"        \"rating\": 4.4,\r",
+					"        \"stock\": 180\r",
+					"    },\r",
+					"    {\r",
+					"        \"name\": \"Tropicana\",\r",
+					"        \"description\": \"Juice bottle 1L\",\r",
+					"        \"img\": \"https://images.pexels.com/photos/4620956/pexels-photo-4620956.jpeg\",\r",
+					"        \"price\": 250,\r",
+					"        \"rating\": 4.7,\r",
+					"        \"stock\": 60\r",
+					"    },\r",
+					"    {\r",
+					"        \"name\": \"Bounty\",\r",
+					"        \"description\": \"Chocolate 2 bars\",\r",
+					"        \"img\": \"https://images.pexels.com/photos/1845415/pexels-photo-1845415.jpeg\",\r",
+					"        \"price\": 220,\r",
+					"        \"rating\": 4.8,\r",
+					"        \"stock\": 150\r",
+					"    }\r",
+					"];\r",
+					"\r",
+					"// Get the current index from environment variables\r",
+					"let index = pm.environment.get(\"index\") || 0;\r",
+					"\r",
+					"if (index < products.length) {\r",
+					"    const product = products[index];\r",
+					"    pm.environment.set(\"name\", product.name);\r",
+					"    pm.environment.set(\"description\", product.description);\r",
+					"    pm.environment.set(\"img\", product.img);\r",
+					"    pm.environment.set(\"price\", product.price);\r",
+					"    pm.environment.set(\"rating\", product.rating);\r",
+					"    pm.environment.set(\"stock\", product.stock);\r",
+					"\r",
+					"    // Increase the index for the next request\r",
+					"    pm.environment.set(\"index\", index + 1);\r",
+					"} else {\r",
+					"    // Reset the index once all requests have been sent\r",
+					"    pm.environment.set(\"index\", 0);\r",
+					"}\r",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "index",
+			"value": ""
+		}
+	]
+}
