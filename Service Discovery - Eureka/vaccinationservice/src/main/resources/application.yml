@@ -1,9 +1,9 @@
 server:
-  port: 8081
+  port: 8082
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/citizendb
+    url: jdbc:mysql://localhost:3306/vaccinationcenterdb
     password: password
     username: root
   jpa:
@@ -16,11 +16,10 @@ spring:
       discovery:
         locator:
           enabled: true
-          lower-case-service-id: true    
+          lower-case-service-id: true  
 
 application:
-    name: CITIZEN-SERVICE
-
-    
+    name: VACCINATION-CENTER-SERVICE
+  
 
 
