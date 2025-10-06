@@ -1,0 +1,23 @@
+spring:
+
+
+      
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: false
+      routes: 
+        - id: CITIZEN-SERVICE
+          uri:
+            lb://CITIZEN-SERVICE
+          predicates:
+          - Path=/citizen/**
+
+        - id: VACCINATION-CENTER-SERVICE
+          uri:
+            lb://VACCINATION-CENTER-SERVICE
+          predicates:
+          - Path=/vaccinationcenter/**     
