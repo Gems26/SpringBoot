@@ -1,0 +1,8 @@
+com\example\consoleservice\config\ElasticConfig.class
+com\example\consoleservice\config\KafkaConsumerConfig.class
+com\example\consoleservice\repository\ConsoleElasticRepository.class
+com\example\consoleservice\config\KafkaProducerConfig.class
+com\example\consoleservice\model\Console.class
+com\example\consoleservice\consumer\ConsoleConsumer.class
+com\example\consoleservice\controller\ConsoleController.class
+com\example\consoleservice\ConsoleServiceApplication.class
