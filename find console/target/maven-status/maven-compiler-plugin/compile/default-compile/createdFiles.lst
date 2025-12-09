@@ -1,4 +1,3 @@
-com\example\consoleservice\config\ElasticConfig.class
 com\example\consoleservice\config\KafkaConsumerConfig.class
 com\example\consoleservice\repository\ConsoleElasticRepository.class
 com\example\consoleservice\config\KafkaProducerConfig.class

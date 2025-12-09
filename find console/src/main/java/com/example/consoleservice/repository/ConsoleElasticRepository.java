@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ConsoleElasticRepository extends ElasticsearchRepository<Console, String> {
-    List<Console> findByNameContaining(String name);
+    List<Console> findByNameContainingIgnoreCase(String name);
 }

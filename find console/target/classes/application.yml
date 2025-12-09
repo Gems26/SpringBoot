@@ -1,0 +1,9 @@
+spring:
+  data:
+    elasticsearch:
+      host: localhost        # hostname without https://
+      port: 9200             # Elasticsearch port
+      username: elastic      # Elasticsearch username
+      password: rkDg-GFELuohb1eTlMRw
+      connection-timeout: 10s
+      socket-timeout: 30s
