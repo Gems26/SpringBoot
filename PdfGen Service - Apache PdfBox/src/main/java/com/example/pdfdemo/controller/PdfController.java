@@ -1,42 +1,48 @@
 package com.example.pdfdemo.controller;
 
 import com.example.pdfdemo.service.PdfService;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 
 @RestController
 public class PdfController {
 
     private final PdfService pdfService;
 
-    // Cache the templates (optional but recommended)
+    // Cache the templates after reading via classpath streams
     private final String indexHtml;
     private final String resultHtml;
 
     public PdfController(PdfService pdfService) throws IOException {
         this.pdfService = pdfService;
-        this.indexHtml  = readResource("/pages/index.html");
-        this.resultHtml = readResource("/pages/result.html");
+        this.indexHtml  = readResource("pages/index.html");
+        this.resultHtml = readResource("pages/result.html");
     }
 
-    private static String readResource(String path) throws IOException {
-        var res = new ClassPathResource(path);
-        return Files.readString(res.getFile().toPath(), StandardCharsets.UTF_8);
+    /**
+     * Read a classpath resource as String using InputStream (works in fat JARs).
+     * DO NOT use resource.getFile() — it fails inside an executable JAR.
+     */
+    private static String readResource(String classpathRelativePath) throws IOException {
+        ClassPathResource res = new ClassPathResource(classpathRelativePath);
+        try (var in = res.getInputStream()) {
+            byte[] bytes = StreamUtils.copyToByteArray(in);
+            return new String(bytes, StandardCharsets.UTF_8);
+        }
     }
 
     @GetMapping(value = "/", produces = MediaType.TEXT_HTML_VALUE)
     public String index() {
-        // Return the page as-is (your index.html contains the form)
         return indexHtml;
     }
 
@@ -46,9 +52,9 @@ public class PdfController {
         String encoded = URLEncoder.encode(safeText, StandardCharsets.UTF_8);
 
         String pdfUrlInline   = "/pdf?text=" + encoded;
-        String pdfUrlDownload = "/pdf?download=true&text=" + encoded;
+        String pdfUrlDownload = "/pdf?download=true&text=" + encoded; // use & here (template is HTML)
 
-        // Replace simple placeholders in result.html like {{INLINE_URL}} and {{DOWNLOAD_URL}}
+        // Replace placeholders in result.html like {{INLINE_URL}} and {{DOWNLOAD_URL}}
         return resultHtml
                 .replace("{{INLINE_URL}}", pdfUrlInline)
                 .replace("{{DOWNLOAD_URL}}", pdfUrlDownload);
@@ -64,7 +70,7 @@ public class PdfController {
 
         ContentDisposition cd = ContentDisposition
                 .builder(download ? "attachment" : "inline")
-                .filename(filename, StandardCharsets.UTF_8)
+                .filename(filename, StandardCharsets.UTF_8) // RFC 5987
                 .build();
 
         return ResponseEntity.ok()
