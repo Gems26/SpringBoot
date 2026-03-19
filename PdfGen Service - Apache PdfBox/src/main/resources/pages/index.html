@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>PDF Generator</title>
+  <style>
+    body { font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; padding:24px; background:#f8fafc; }
+    .card { max-width: 900px; margin: 0 auto; background:#fff; padding:20px; border-radius:14px; box-shadow:0 6px 24px rgba(0,0,0,0.08) }
+    textarea { width:100%; height:220px; padding:12px; font-size:14px; border:1px solid #d1d5db; border-radius:10px; }
+    button { background:#2563eb; color:#fff; border:0; padding:12px 16px; border-radius:10px; font-weight:600; cursor:pointer; }
+    button:hover { background:#1e40af; }
+    .hint { color:#64748b; font-size:.9rem; margin-top:8px; }
+    label { font-weight:600; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Generate PDF from Text</h2>
+    <form method="get" action="/result">
+      <label for="text">Enter your text:</label><br/>
+      <textarea id="text" name="text" placeholder="Type or paste text to convert to PDF...">Hello from Spring Boot + PDFBox!</textarea>
+      <div class="hint">After submitting, you'll see a preview and a download link.</div>
+      <div style="margin-top:12px;">
+        <button type="submit">Create PDF</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
